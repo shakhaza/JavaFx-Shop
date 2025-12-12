@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.example.javafxapp.HelloController">
+
+    <!-- TOP BAR -->
+    <top>
+        <HBox spacing="20" alignment="CENTER_LEFT"
+              styleClass="header-bar">
+            <children>
+                <Label text="MOSH-SHOP"
+                       styleClass="header-title"/>
+                <TextField fx:id="searchField"
+                           promptText="Search product..."
+                           styleClass="search-field"/>
+            </children>
+            <padding>
+                <Insets top="10" right="20" bottom="10" left="20"/>
+            </padding>
+        </HBox>
+    </top>
+
+    <!-- LEFT: CATEGORIES & FAVORITES -->
+    <left>
+        <VBox spacing="10" styleClass="side-panel">
+            <children>
+                <Label text="Categories"
+                       styleClass="side-title"/>
+                <ListView fx:id="categoryList"
+                          prefWidth="200"/>
+
+                <!-- НОВЫЙ БЛОК: ИЗБРАННОЕ -->
+                <Label text="Favorites"
+                       styleClass="side-title"/>
+                <HBox spacing="5" alignment="CENTER_LEFT">
+                    <Button text="❤️ My Favorites"
+                            onAction="#showFavorites"
+                            styleClass="favorites-btn"/>
+                    <Label fx:id="favoritesCountLabel"
+                           text="(0)"
+                           styleClass="favorites-count"/>
+                </HBox>
+            </children>
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+        </VBox>
+    </left>
+
+    <!-- CENTER: PRODUCTS GRID -->
+    <center>
+        <ScrollPane fitToWidth="true">
+            <content>
+                <FlowPane fx:id="productGrid"
+                          hgap="15" vgap="15"
+                          prefWrapLength="800">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10"/>
+                    </padding>
+                </FlowPane>
+            </content>
+        </ScrollPane>
+    </center>
+
+    <!-- RIGHT: CART -->
+    <right>
+        <VBox spacing="10" styleClass="side-panel">
+            <children>
+                <Label text="Cart"
+                       styleClass="side-title"/>
+
+                <ListView fx:id="cartList"
+                          prefWidth="220"
+                          prefHeight="350"/>
+
+                <!-- ПОДСКАЗКА ДЛЯ УДАЛЕНИЯ -->
+                <Label text="Double-click to remove item"
+                       styleClass="cart-hint"/>
+
+                <!-- КНОПКИ УПРАВЛЕНИЯ КОРЗИНОЙ -->
+                <HBox spacing="10">
+                    <Button text="Clear Cart"
+                            onAction="#clearCart"
+                            styleClass="clear-btn"/>
+                    <Button text="Remove Selected"
+                            onAction="#removeSelectedFromCart"
+                            styleClass="remove-btn"/>
+                </HBox>
+
+                <Label text="Total:"/>
+                <Label fx:id="totalLabel"
+                       styleClass="total-label"/>
+            </children>
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+        </VBox>
+    </right>
+
+</BorderPane>

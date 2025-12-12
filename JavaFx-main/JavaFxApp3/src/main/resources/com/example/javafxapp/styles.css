@@ -1,0 +1,186 @@
+/* Global */
+.root {
+    -fx-background-color: #f2f2f2;
+    -fx-font-family: "Segoe UI", sans-serif;
+}
+
+/* Header */
+.header-bar {
+    -fx-background-color: #ff4b32;
+}
+
+.header-title {
+    -fx-text-fill: white;
+    -fx-font-size: 22;
+    -fx-font-weight: bold;
+}
+
+.search-field {
+    -fx-background-radius: 20;
+    -fx-background-color: white;
+    -fx-padding: 4 12;
+    -fx-pref-width: 320;
+}
+
+/* Side panels */
+.side-panel {
+    -fx-background-color: #f8f8f8;
+    -fx-padding: 10;
+}
+
+.side-title {
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+/* Product card */
+.product-card {
+    -fx-background-color: white;
+    -fx-border-color: #dddddd;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-padding: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 2);
+}
+
+.product-card:hover {
+    -fx-border-color: #ff9b85;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.12), 8, 0, 0, 3);
+    -fx-cursor: hand;
+}
+
+.product-name {
+    -fx-font-weight: bold;
+    -fx-font-size: 13;
+}
+
+.product-price {
+    -fx-text-fill: #ff4b32;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+/* Add to cart button */
+.add-btn {
+    -fx-background-color: #ff4b32;
+    -fx-text-fill: white;
+    -fx-background-radius: 15;
+    -fx-padding: 4 14;
+}
+
+.add-btn:hover {
+    -fx-background-color: #ff6b4d;
+}
+
+/* Total label */
+.total-label {
+    -fx-font-size: 16;
+    -fx-font-weight: bold;
+    -fx-text-fill: #ff4b32;
+}
+
+/* Cart buttons */
+.clear-btn {
+    -fx-background-color: #ff6b6b;
+    -fx-text-fill: white;
+    -fx-background-radius: 15;
+    -fx-padding: 6 12;
+    -fx-font-size: 12;
+    -fx-cursor: hand;
+}
+
+.clear-btn:hover {
+    -fx-background-color: #ff5252;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 1);
+}
+
+.remove-btn {
+    -fx-background-color: #ffa726;
+    -fx-text-fill: white;
+    -fx-background-radius: 15;
+    -fx-padding: 6 12;
+    -fx-font-size: 12;
+    -fx-cursor: hand;
+}
+
+.remove-btn:hover {
+    -fx-background-color: #ff9800;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 4, 0, 0, 1);
+}
+
+/* Cart hint */
+.cart-hint {
+    -fx-font-size: 10;
+    -fx-text-fill: #888;
+    -fx-font-style: italic;
+    -fx-padding: 5 0 0 0;
+}
+
+/* ===== СТИЛИ ДЛЯ ИЗБРАННОГО ===== */
+
+/* Кнопка сердечка */
+.favorite-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-font-size: 16px;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+    -fx-min-width: 24px;
+    -fx-min-height: 24px;
+    -fx-background-radius: 50%;
+}
+
+.favorite-btn:hover {
+    -fx-effect: dropshadow(gaussian, rgba(255, 75, 50, 0.3), 8, 0, 0, 0);
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
+/* Кнопка "My Favorites" */
+.favorites-btn {
+    -fx-background-color: #ffebee;
+    -fx-text-fill: #ff4b32;
+    -fx-background-radius: 15;
+    -fx-padding: 6 15;
+    -fx-font-size: 12;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-border-color: #ffcdd2;
+    -fx-border-width: 1;
+    -fx-border-radius: 15;
+}
+
+.favorites-btn:hover {
+    -fx-background-color: #ffcdd2;
+    -fx-effect: dropshadow(gaussian, rgba(255, 75, 50, 0.2), 6, 0, 0, 2);
+}
+
+/* Счетчик избранных */
+.favorites-count {
+    -fx-text-fill: #ff4b32;
+    -fx-font-weight: bold;
+    -fx-font-size: 12;
+    -fx-padding: 0 0 0 5;
+}
+
+/* Анимация сердечка при клике */
+@keyframes heartbeat {
+    0% { -fx-scale-x: 1; -fx-scale-y: 1; }
+    25% { -fx-scale-x: 1.3; -fx-scale-y: 1.3; }
+    50% { -fx-scale-x: 1; -fx-scale-y: 1; }
+    75% { -fx-scale-x: 1.2; -fx-scale-y: 1.2; }
+    100% { -fx-scale-x: 1; -fx-scale-y: 1; }
+}
+
+.favorite-btn:pressed {
+    -fx-animation: heartbeat 0.5s;
+}
+
+/* Подсказка для кнопки избранного */
+.tooltip {
+    -fx-font-size: 11;
+    -fx-background-color: rgba(0, 0, 0, 0.8);
+    -fx-text-fill: white;
+    -fx-padding: 5 8;
+    -fx-background-radius: 4;
+}
