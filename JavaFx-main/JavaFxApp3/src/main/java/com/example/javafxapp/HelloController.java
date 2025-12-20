@@ -26,9 +26,11 @@ public class HelloController {
     @FXML private TextField searchField;
     @FXML private ListView<String> categoryList;
     @FXML private FlowPane productGrid;
+    @FXML private FlowPane favoritesGrid;
     @FXML private ListView<String> cartList;
     @FXML private Label totalLabel;
     @FXML private Label favoritesCountLabel;
+    @FXML private Tab cartFavoritesTab;
 
     // Данные и сервисы
     private int totalSum = 0;
@@ -89,6 +91,14 @@ public class HelloController {
         updateFavoritesCount();
 
         updateTotal();
+
+        if (cartFavoritesTab != null) {
+            cartFavoritesTab.setOnSelectionChanged(event -> {
+                if (cartFavoritesTab.isSelected()) {
+                    showFavorites();
+                }
+            });
+        }
     }
 
     // =================== КОРЗИНА ===================
@@ -123,13 +133,17 @@ public class HelloController {
 
     @FXML
     private void showFavorites() {
-        productGrid.getChildren().clear();
+        if (favoritesGrid == null) {
+            return;
+        }
+
+        favoritesGrid.getChildren().clear();
 
         Set<String> favoriteNames = favoritesService.getFavorites();
         if (favoriteNames.isEmpty()) {
             Label emptyLabel = new Label("No favorites yet ❤️\nAdd products to favorites!");
             emptyLabel.setStyle("-fx-font-size: 14; -fx-text-fill: #888; -fx-padding: 40; -fx-alignment: center;");
-            productGrid.getChildren().add(emptyLabel);
+            favoritesGrid.getChildren().add(emptyLabel);
             return;
         }
 
@@ -141,7 +155,7 @@ public class HelloController {
         int foundCount = 0;
         for (UiShopService.ProductItem product : allProducts) {
             if (favoriteNames.contains(product.getName())) {
-                addProductCard(product);
+                addProductCardToPane(product, favoritesGrid);
                 foundCount++;
             }
         }
@@ -149,7 +163,7 @@ public class HelloController {
         if (foundCount == 0) {
             Label noMatchLabel = new Label("No matching products found in favorites");
             noMatchLabel.setStyle("-fx-font-size: 14; -fx-text-fill: #888; -fx-padding: 20;");
-            productGrid.getChildren().add(noMatchLabel);
+            favoritesGrid.getChildren().add(noMatchLabel);
         }
     }
 
@@ -172,7 +186,7 @@ public class HelloController {
         List<UiShopService.ProductItem> found = shopService.searchProducts(text);
         productGrid.getChildren().clear();
         for (UiShopService.ProductItem item : found) {
-            addProductCard(item);
+            addProductCardToPane(item, productGrid);
         }
     }
 
@@ -183,13 +197,13 @@ public class HelloController {
                 shopService.getProductsByCategory(categoryName);
 
         for (UiShopService.ProductItem item : items) {
-            addProductCard(item);
+            addProductCardToPane(item, productGrid);
         }
     }
 
     // =================== КАРТОЧКА ТОВАРА ===================
 
-    private void addProductCard(UiShopService.ProductItem product) {
+    private void addProductCardToPane(UiShopService.ProductItem product, FlowPane targetPane) {
         VBox box = new VBox(8);
         box.setPrefWidth(240);
         box.getStyleClass().add("product-card");
@@ -239,6 +253,10 @@ public class HelloController {
             favoritesService.toggleFavorite(product.getName());
             updateFavoriteButton(favoriteBtn, product.getName());
             updateFavoritesCount();
+
+            if (cartFavoritesTab != null && cartFavoritesTab.isSelected()) {
+                showFavorites();
+            }
         });
 
         // Кнопка добавления отзыва (плюсик)
@@ -388,7 +406,7 @@ public class HelloController {
         );
 
         // Добавляем карточку в сетку
-        productGrid.getChildren().add(box);
+        targetPane.getChildren().add(box);
     }
 
     // =================== ВСПОМОГАТЕЛЬНЫЕ МЕТОДЫ ===================
